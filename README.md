@@ -103,3 +103,10 @@ Folgende Dinge werden nicht getestet. Die Funktion Start und Update sind standar
 + Start()
 + Update()
 ```
+
+## Approach
+
+In diesem Projekt werden Komponententest und Unit Tests durchgeführt. TDD wird nicht eingesetzt, da das Projekt schon fertig programmiert ist.
+
+## Item pass / fail criteria
+
