@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
     public int score;
     public int highscore;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI menuScoreText;
-    public TextMeshProUGUI menuHighscoreText;
+    public Text scoreText;
+    public Text menuScoreText;
+    public Text menuHighscoreText;
 
     void Start()
     {

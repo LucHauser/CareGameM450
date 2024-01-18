@@ -1,8 +1,8 @@
 # Care Game Modul 450
 
-## Intoduction
+## Einführung
 
-Dieses Projekt umfasst ein kleines 3D-Spiel, der Spiel steuert ein Auto und muss Hinderenisen, wie Wände, Kaktehen und Palemn aus weichen. Das Spiel wird mit der Zeit immer schwieriger. Der Spieler hat verlohren, wenn er in etwas hinein fährt.
+Dieses Projekt umfasst ein kleines 3D-Spiel, bei dem der Spieler ein Auto steuert und Hindernissen wie Wänden, Kakteen und Palmen ausweichen muss. Das Spiel wird im Verlauf zunehmend schwieriger. Der Spieler verliert, wenn das Auto mit einem Objekt kollidiert.
 
 **Steuerung:**
 
@@ -10,6 +10,15 @@ Dieses Projekt umfasst ein kleines 3D-Spiel, der Spiel steuert ein Auto und muss
 -   Rechte Pfeiltaste: Steuert Auto nach rechts.
 
 ![Screenshot 2022-01-20 142751.png](/Assets/IMPORTET/23.png)
+
+## Planung
+
+-   **26.10.2023 - 2.11.2023:** Testkonzept für Projekt schreiben.
+-   **09.11.2023 - 16.11.2023:** Mit Unit Test in Unity auseinandersetzen.
+-   **28.12.2023 - 11.01.2024:** Eigene Test für Spiel schreiben.
+-   **18.01.2024 - 18.01.2024:** Präsentation erstellen und Dokumentation schreiben.
+
+## Projekt Struktur
 
 Die folgenden Klassen exisitern in meinem Projekt.
 
@@ -76,7 +85,6 @@ Getestet werden folgenden Funktionen:
 
 //Spawner.cs
 + RandomSpawnTime()
-+ Update()
 + SpawnObstacels()
 + reshuffle()
 ```
@@ -112,15 +120,6 @@ In diesem Projekt werden Komponententest und Unit Tests durchgeführt. TDD wird 
 
 ### Score.cs
 
-| Function     | Pass Criteria                                                   | Fail Criteria                                       |
-| ------------ | --------------------------------------------------------------- | --------------------------------------------------- |
-| ResetScore() | - Score variable set to 0.                                      | - Score variable not set to 0.                      |
-|              | - PlayerPrefs "score" updated with the new score value.         | - PlayerPrefs "score" not updated.                  |
-| AddScore()   | - Score variable incremented by 1.                              | - Score variable not updated by the increment of 1. |
-| SaveScore()  | - If current score > highscore, update highscore variable.      | - Current score <= highscore, no update made.       |
-|              | - PlayerPrefs "highscore" updated with the new highscore value. | - PlayerPrefs "highscore" not updated.              |
-|              | - PlayerPrefs "score" updated with the current score value.     | - PlayerPrefs "score" not updated.                  |
-
 ### Spawn.cs
 
 | Function          | Pass Criteria                                                              | Fail Criteria                                                       |
@@ -137,7 +136,6 @@ In diesem Projekt werden Komponententest und Unit Tests durchgeführt. TDD wird 
 
 Es wurden folgende Test-Artefakte verwendet:
 
--   Dokuemntation
 -   Testkonzept
 -   Visual Studio Community
 -   Unity Test Framework (UTF)
@@ -151,3 +149,11 @@ Es werden nur Unit-Test eingesetzt.
 -   Unity 2020.3.24f1
 -   Visual Studio Community
 -   Unity Test Framework (UTF)
+
+## Ausführen
+
+Im folgenden Abschnitt wird erklärt, wie die Test für das Unity-Spiel ausgeführt werden können.
+
+1. Öffnene Sie das Projekt in Unity.
+2. Gehen Sie unter
+   ![Anleitung für Test Runner](/Images/TestRunner.png)

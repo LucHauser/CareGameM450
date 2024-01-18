@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Summary">
+  <Summary>
+    <Generatedon>17.01.2024 - 11:58:24</Generatedon>
+    <Parser>MultiReportParser (2x OpenCoverParser)</Parser>
+    <Assemblies>2</Assemblies>
+    <Classes>10</Classes>
+    <Files>10</Files>
+    <Coveredlines>21</Coveredlines>
+    <Uncoveredlines>172</Uncoveredlines>
+    <Coverablelines>193</Coverablelines>
+    <Totallines>450</Totallines>
+    <Linecoverage>10.8</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>5</Coveredmethods>
+    <Totalmethods>36</Totalmethods>
+    <Methodcoverage>13.8</Methodcoverage>
+  </Summary>
+  <Coverage>
+    <Assembly name="PlayerMode" classes="2" coverage="15.8" coveredlines="10" coverablelines="63" totallines="192" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="9" methodcoverage="11.1">
+      <Class name="ScoreTests" coverage="0" coveredlines="0" coverablelines="45" totallines="130" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="7" methodcoverage="0" />
+      <Class name="SpawnerTests" coverage="55.5" coveredlines="10" coverablelines="18" totallines="62" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="2" methodcoverage="50" />
+    </Assembly>
+    <Assembly name="Scripts" classes="8" coverage="8.4" coveredlines="11" coverablelines="130" totallines="258" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="27" methodcoverage="14.8">
+      <Class name="Clean" coverage="0" coveredlines="0" coverablelines="3" totallines="10" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
+      <Class name="Difficulty" coverage="0" coveredlines="0" coverablelines="9" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
+      <Class name="GameOver" coverage="0" coveredlines="0" coverablelines="14" totallines="26" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+      <Class name="MoveSpawner" coverage="4.1" coveredlines="1" coverablelines="24" totallines="45" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="4" methodcoverage="25" />
+      <Class name="Obstacle" coverage="14.2" coveredlines="1" coverablelines="7" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="3" methodcoverage="33.3" />
+      <Class name="PlayerMove" coverage="7.1" coveredlines="1" coverablelines="14" totallines="26" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="4" methodcoverage="25" />
+      <Class name="Score" coverage="0" coveredlines="0" coverablelines="24" totallines="48" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="5" methodcoverage="0" />
+      <Class name="Spawner" coverage="22.8" coveredlines="8" coverablelines="35" totallines="64" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="5" methodcoverage="20" />
+    </Assembly>
+  </Coverage>
+</CoverageReport>

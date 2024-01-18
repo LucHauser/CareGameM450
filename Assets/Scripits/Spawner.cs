@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
         spwanTime = RandomSpawnTime();
     }
 
-    float RandomSpawnTime() 
+    public float RandomSpawnTime() 
     {
         return Random.Range(spawnTimeRange.x, spawnTimeRange.y);
     }
@@ -33,12 +33,12 @@ public class Spawner : MonoBehaviour
         {
             timer = 0;
             spwanTime = RandomSpawnTime();
-            StartCoroutine(SpawnObstacels());
+            StartCoroutine(spawnObstacels());
         }
     }
 
-    IEnumerator SpawnObstacels() {
-        reshuffle();
+    IEnumerator spawnObstacels() {
+        Reshuffle();
 
         float difficulty = Random.Range(defficultyRange.x, defficultyRange.y);
         for (int i = 0; i < difficulty; i++) {
@@ -52,7 +52,7 @@ public class Spawner : MonoBehaviour
         FindObjectOfType<Score>().AddScore();
     }
 
-    void reshuffle() {
+    public void Reshuffle() {
         for (int t = 0; t < spawnPoints.Length; t++) {
             Transform tmp = spawnPoints[t];
             int r = Random.Range(t, spawnPoints.Length);
