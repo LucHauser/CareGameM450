@@ -2,7 +2,7 @@
 
 ## Einführung
 
-Dieses Projekt umfasst ein kleines 3D-Spiel, bei dem der Spieler ein Auto steuert und Hindernissen wie Wänden, Kakteen und Palmen ausweichen muss. Das Spiel wird im Verlauf zunehmend schwieriger. Der Spieler verliert, wenn das Auto mit einem Objekt kollidiert.
+Dieses Projekt umfasst ein kleines 3D-Spiel, bei dem der Spieler ein Auto steuert und Hindernissen wie Wänden, Kakteen und Palmen ausweichen muss. Das Spiel wird im Verlauf zunehmend schwieriger. Der Spieler verliert, wenn das Auto mit einem Objekt kollidiert. Ziel dieses Moduls ist es Test für das Spiel zu Programmieren.
 
 **Steuerung:**
 
@@ -11,12 +11,21 @@ Dieses Projekt umfasst ein kleines 3D-Spiel, bei dem der Spieler ein Auto steuer
 
 ![Screenshot 2022-01-20 142751.png](/Assets/IMPORTET/23.png)
 
+## Tests ausführen
+
+Im folgenden Abschnitt wird erklärt, wie die Test für das Unity-Spiel ausgeführt werden können.
+
+1. Installieren Sie den Unity Editor.
+2. Öffnene Sie das Projekt in Unity.
+3. Gehen Sie unter Windows->General->Test Runner->Run All
+   ![Anleitung für Test Runner](/Images/TestRunner.png) Danach werden alle Test ausgeführt. Zudem öffnet sich ein Ordner, wenn man auf index.html öffnet kann man die Code Covrage der Test ansehen.
+
 ## Planung
 
 -   **26.10.2023 - 2.11.2023:** Testkonzept für Projekt schreiben.
 -   **09.11.2023 - 16.11.2023:** Mit Unit Test in Unity auseinandersetzen.
 -   **28.12.2023 - 11.01.2024:** Eigene Test für Spiel schreiben.
--   **18.01.2024 - 18.01.2024:** Präsentation erstellen und Dokumentation schreiben.
+-   **18.01.2024 - 18.01.2024:** Präsentation vorbereiten und Dokumentation schreiben.
 
 ## Projekt Struktur
 
@@ -60,8 +69,8 @@ class Spawner: MonoBehaviour {
   + Start()
   + RandomSpawnTime()
   + Update()
-  + SpawnObstacels()
-  + reshuffle()
+  + spawnObstacels()
+  + Reshuffle()
 }
 
 class Obstacle: MonoBehaviour {
@@ -70,6 +79,29 @@ class Obstacle: MonoBehaviour {
 
   + Start()
   + Update()
+}
+```
+
+Zudem sind zwei neue Test Klassen hinzugekomment, sie befinden sich unter '\Assets\Tests\EditoMode'
+
+```csharp
+[TestFixture]
+public class ScoreTests
+{
+    - ResetScore_ResetsScoreVariableToZero()
+    - ResetScore_ResetsScorePlayerPrefsToZero()
+    - AddScore_IncreasesScoreByOne(int a, int expected)
+    - SaveScore_UpdatesHighscoreVariableIfCurrentScoreIsHigher(int a, int b, int expected)
+    - SaveScore_DoesNotUpdateHighscoreIfCurrentScoreIsLower(int a, int b, int expected)
+    - SaveScore_HighscorePlayerPrefsGetsUpdated(int a, int expected)
+    - SaveScore_SavesCurrentScoreInPlayerPrefs(int a, int expected)
+}
+
+[TestFixture]
+public class SpawnerTests
+{
+    - RandomSpawnTime_ReturnsRandomValueWithinRange(float a, float b)
+    - Reshuffle_ShouldShuffleSpawnPoints(float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3, float x4, float y4, float z4)
 }
 ```
 
@@ -85,13 +117,12 @@ Getestet werden folgenden Funktionen:
 
 //Spawner.cs
 + RandomSpawnTime()
-+ SpawnObstacels()
-+ reshuffle()
++ Reshuffle()
 ```
 
 ## Features not to be tested
 
-Folgende Dinge werden nicht getestet. Die Funktion Start und Update sind standart Funktionen Unity. Start wird immer bei der Instanzierung eines Objektes ausgeführt und Update alle 60 Frames weshalb es keinen Sinn macht diese zu testen. OnTriggerEnter(Collider other) wird nicht getest da diese Methode inheralb von Unity Kolisionen testet, was nicht mit Unit Test umgesetzwerden kann.
+Folgende Dinge werden nicht getestet. Die Funktion Start und Update sind standart Funktionen von Unity. Start wird immer bei der Instanzierung eines Objektes ausgeführt und Update alle 60 Frames weshalb es keinen Sinn macht diese zu testen. OnTriggerEnter(Collider other) wird nicht getest da diese Methode inheralb von Unity Kolisionen überprüft, was nicht mit Unit Test getested werden kann. spawnObstacels kann nicht getested werden, da es ein Coroutine ist.
 
 ```csharp
 //Score.cs
@@ -106,6 +137,7 @@ Folgende Dinge werden nicht getestet. Die Funktion Start und Update sind standar
 //Spawner.cs
 + Start()
 + Update()
++ spawnObstacels()
 
 //Obstacle.cs
 + Start()
@@ -120,17 +152,22 @@ In diesem Projekt werden Komponententest und Unit Tests durchgeführt. TDD wird 
 
 ### Score.cs
 
+| Function     | Pass Criteria                                                            | Fail Criteria                                                      |
+| ------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| ResetScore() | Score variable set to 0.                                                 | Score variable not set to 0.                                       |
+|              | PlayerPrefs "score" updated with the new score value.                    | PlayerPrefs "score" not updated.                                   |
+| AddScore()   | Score variable incremented by 1.                                         | Score variable not updated by the increment of 1.                  |
+| SaveScore()  | If current score > highscore, update highscore variable.                 | Current score > highscore, highscore is not set to value of score. |
+|              | If highscore is > score, highscore should not update highscore variable. | Highscore > score, updates highscore to score value                |
+|              | PlayerPrefs "highscore" updated with the new highscore value.            | PlayerPrefs "highscore" not updated.                               |
+|              | PlayerPrefs "score" updated with the current score value.                | PlayerPrefs "score" not updated.                                   |
+
 ### Spawn.cs
 
-| Function          | Pass Criteria                                                              | Fail Criteria                                                       |
-| ----------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| RandomSpawnTime() | - Returns a random value within the specified `spawnTimeRange`.            | - Does not return a random value within the specified range.        |
-| Update()          | - Increments the `timer` variable by the time passed since the last frame. | - Does not increment the `timer` variable.                          |
-| SpawnObstacles()  | - Calls the `reshuffle()` function.                                        | - Does not call the `reshuffle()` function.                         |
-|                   | - Spawns obstacles based on the specified difficulty range.                | - Does not spawn obstacles based on the specified difficulty range. |
-|                   | - Adjusts the size and rotation of spawned obstacles accordingly.          | - Does not adjust the size and rotation of spawned obstacles.       |
-|                   | - Delays between spawning obstacles.                                       | - Does not have delays between spawning obstacles.                  |
-| reshuffle()       | - Shuffles the elements in the `spawnPoints` array.                        | - Does not shuffle the elements in the `spawnPoints` array.         |
+| Function          | Pass Criteria                                               | Fail Criteria                                              |
+| ----------------- | ----------------------------------------------------------- | ---------------------------------------------------------- |
+| RandomSpawnTime() | Returns a random value within the specified spawnTimeRange. | Does not return a random value within the specified range. |
+| Reshuffle()       | Shuffles the elements in the spawnPoints array.             | Does not shuffle the elements in the spawnPoints array.    |
 
 ## Test Deliverables
 
@@ -140,20 +177,12 @@ Es wurden folgende Test-Artefakte verwendet:
 -   Visual Studio Community
 -   Unity Test Framework (UTF)
 
-## Testing Tasks
-
-Es werden nur Unit-Test eingesetzt.
-
 ## Environmental Needs
 
 -   Unity 2020.3.24f1
 -   Visual Studio Community
 -   Unity Test Framework (UTF)
 
-## Ausführen
+## Fazit
 
-Im folgenden Abschnitt wird erklärt, wie die Test für das Unity-Spiel ausgeführt werden können.
-
-1. Öffnene Sie das Projekt in Unity.
-2. Gehen Sie unter
-   ![Anleitung für Test Runner](/Images/TestRunner.png)
+Ich habe es als sehr spannend empfunden, Tests speziell für ein Unity-Projekt zu schreiben, da der Prozess meiner Meinung nach etwas anders ist als beispielsweise beim Schreiben von Tests für ein Java-Projekt. Eine große Herausforderung bestand darin, dass es nicht sehr wenig Dokumentationen und Ressourcen zum Thema Testing in Unity gibt. Am Ende ist es mir jedoch trotzdem gelungen, einige Tests zu schreiben und diese erfolgreich auszuführen. Zudem konnte ich auch die Code Covrage hinzufügen.

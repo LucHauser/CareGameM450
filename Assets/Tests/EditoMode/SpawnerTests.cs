@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.TestTools;
@@ -29,6 +30,7 @@ public class SpawnerTests
 
     [Test]
     [TestCase(4, 4, 4, 1, 1, 1, 2, 2, 2, 3, 3, 3)]
+    [TestCase(5, 10, 15, 4, 8, 12, 7, 14, 21, 1, 2, 3)]
     public void Reshuffle_ShouldShuffleSpawnPoints(float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3, float x4, float y4, float z4)
     {
         // Arrange
@@ -57,6 +59,10 @@ public class SpawnerTests
         spawner.Reshuffle();
 
         // Assert
-        Assert.AreNotEqual(originalSpawnPoints, spawner.spawnPoints);
+        bool positionsEqual = originalSpawnPoints.Zip(spawner.spawnPoints, (t1, t2) =>
+            t1.position.x == t2.position.x && t1.position.y == t2.position.y 
+            && t1.position.z == t2.position.z).All(result => result);
+
+        Assert.IsTrue(!positionsEqual);
     }
 }

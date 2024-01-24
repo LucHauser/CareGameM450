@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
@@ -52,12 +54,33 @@ public class Spawner : MonoBehaviour
         FindObjectOfType<Score>().AddScore();
     }
 
+    // Function to randomize using the Fisher-Yates shuffle algorithm
     public void Reshuffle() {
-        for (int t = 0; t < spawnPoints.Length; t++) {
-            Transform tmp = spawnPoints[t];
-            int r = Random.Range(t, spawnPoints.Length);
-            spawnPoints[t] = spawnPoints[r];
-            spawnPoints[r] = tmp;
+        // Get the length of the array
+        int n = spawnPoints.Length;
+
+        // Create a new random number generator with a seed based on the current time in milliseconds
+        System.Random rng = new System.Random(DateTime.Now.Millisecond);
+
+        // Iterate through the array elements in reverse order
+        while (n > 1)
+        {
+            // Decrement the index
+            n--;
+
+            // Generate a random index between 0 and the current index (inclusive)
+            int k = rng.Next(n + 1);
+
+            // Swap elements and ensure the new index is different from the current index
+            while (k == n)
+            {
+                k = rng.Next(n + 1);
+            }
+
+            // Perform the swap of elements at indices k and n
+            Transform value = spawnPoints[k];
+            spawnPoints[k] = spawnPoints[n];
+            spawnPoints[n] = value;
         }
     }
 }
